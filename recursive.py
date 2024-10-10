@@ -42,19 +42,18 @@ print(f"hanoi({n},A,C,B)----end")
 
 
 
-def binary_search(arr, target, low, high):
-    if low > high:
-        return -1  # not found
-    mid = (low + high) // 2
+def binary_search(arr, target):
+    if len(arr) == 0:
+        return -1
+    mid = len(arr) // 2
     if arr[mid] == target:
-        return mid  # found return index
-    elif arr[mid] < target:
-        return binary_search(arr, target, mid + 1, high)  # search right part
+        return mid
+    elif arr[mid] > target:
+        return binary_search(arr[:mid], target)
     else:
-        return binary_search(arr, target, low, mid - 1)   # search left part
+        return mid + 1 + binary_search(arr[mid+1:], target)
 
 # example
-arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 target = 5
-result = binary_search(arr, target, 0, len(arr) - 1)
-print(result)  
+arr = [9,8,7,6,5,4,3,2,1]
+print(binary_search(arr, 5))
